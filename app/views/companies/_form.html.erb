@@ -1,0 +1,143 @@
+<%= render partial: 'companies/progress_bar', locals: {company: @company, active: ['new_company']}%>
+<%= form_for(@company, html: {class: 'card'}) do |f| %>
+<div class="card-header">
+  <h3 class="card-title"><%=t :new_company %></h3>
+</div>
+<% if @company.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@company.errors.count, "error") %> prohibited this company from being saved:</h2>
+
+  <ul>
+    <% @company.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :name, class: "form-label" %>
+        <%= f.text_field :name , class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :telphone, class: "form-label" %>
+        <div class="input-group">
+          <%= f.text_field :telphone , class: "form-control", placeholder: "", style: 'direction: ltr;' %>
+          <span class="input-group-prepend" id="basic-addon1">
+            <span class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :fax, class: "form-label" %>
+        <div class="input-group">
+          <%= f.text_field :fax , class: "form-control", placeholder: "" , style: 'direction: ltr;'%>
+          <span class="input-group-prepend" id="basic-addon1">
+            <span class="input-group-text"><i class="fa fa-fax" aria-hidden="true"></i></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :email, class: "form-label" %>
+        <div class="input-group">
+          <%= f.text_field :email , class: "form-control", placeholder: "", style: 'direction: ltr;' %>
+          <span class="input-group-prepend" id="basic-addon1">
+            <span class="input-group-text">@</span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :telegram_channel, class: "form-label" %>
+        <div class="input-group">
+          <%= f.text_field :telegram_channel , class: "form-control", placeholder: "" , style: 'direction: ltr;'%>
+          <span class="input-group-prepend" id="basic-addon1">
+            <span class="input-group-text"><i class="fa fa-telegram" aria-hidden="true"></i></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :instagram_page, class: "form-label" %>
+        <div class="input-group">
+          <%= f.text_field :instagram_page , class: "form-control", placeholder: "", style: 'direction: ltr;' %>
+          <span class="input-group-prepend" id="basic-addon1">
+            <span class="input-group-text"><i class="fa fa-instagram" aria-hidden="true"></i></span>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :year_established, class: "form-label" %>
+        <% @now = {}%>
+        <% if @company.id == nil%>
+        <% @now = JalaliDate.to_jalali(Time.now).year.to_i%>
+        <%else%>
+        <% @now = @company.year_established.to_i %>
+        <%end%>
+        <%= f.select :year_established, options_for_select(1300..@now, @now), {},{class: "form-control"} %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :total_employees, class: "form-label" %>
+        <%= f.text_field :total_employees, class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-group">
+        <%= f.label :headquarter_address, class: "form-label" %>
+        <%= f.text_area :headquarter_address , rows: "3", class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-group">
+        <%= f.label :shop_address, class: "form-label" %>
+        <%= f.text_area :shop_address , rows: "3", class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-7">
+      <div class="form-group">
+        <%= f.label :factory_address, class: "form-label" %>
+        <%= f.text_area :factory_address, rows: "3" , class: "form-control" %>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-footer text-right">
+    <button type="submit" class="btn btn-primary"><%=t :submit_and_go%></button>
+  </div>
+  <% end %>
+</div>

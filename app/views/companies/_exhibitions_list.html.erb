@@ -1,0 +1,30 @@
+<div id='company_exhibitions_list'>
+  <div class="table-responsive">
+    <table class="table card-table table-striped table-vcenter">
+      <thead>
+        <tr>
+          <th><%=t :title%></th>
+          <th><%=t :year%></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for participation in company.participations%>
+        <% @exhibition = Exhibition.find(participation.exhibition_id)%>
+        <tr>
+          <td><small><%= truncate(@exhibition.title, length: 50) %></small></td>
+          <td><%= participation.year%></td>
+          <td class="">
+            <%= link_to participation, method: :delete, remote: true, data: { confirm: "#{t(:are_you_sure_?)}" } do%>
+              <i class="fe fe-trash"></i>
+            <%end%>
+            <%= link_to edit_participation_path(participation), remote: true do%>
+              <i class="fe fe-edit"></i>
+            <%end%>
+          </td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>

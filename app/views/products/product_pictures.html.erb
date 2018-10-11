@@ -1,0 +1,59 @@
+<%= render partial: 'products/progress_bar', locals: {product: @product, active: ['new_product', 'product_pictures']}%>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title"><%=t :product_pictures%></h3>
+  </div>
+  <div class="card-body">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt, iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem. A consequuntur, deserunt eaque error nulla temporibus!
+    <ul>
+      <li>In fermentum leo eu lectus mollis, quis dictum mi aliquet.</li>
+      <li>Morbi eu nulla lobortis, lobortis est in, fringilla felis.</li>
+      <li>Aliquam nec felis in sapien venenatis viverra fermentum nec lectus.</li>
+      <li>Ut non enim metus.</li>
+    </ul>
+  </div>
+  <%= form_for(Upload.new, html: {class: 'dropzone'}) do |f| %>
+  <%= f.hidden_field :uploadable_type, value: 'Product'%>
+  <%= f.hidden_field :uploadable_id, value: @product.id%>
+  <%= f.hidden_field :attachment_type, value: 'product_pictures'%>
+  <%= hidden_field_tag :file_type, 'picture'%>
+  <div class="fallback">
+    <%= f.file_field :picture %><br>
+    <%= f.hidden_field :product_id, value: @product.id%>
+    <%= f.submit "Upload" %>
+  </div>
+  <% end %>
+  <script>
+  Dropzone.autoDiscover = false;
+  $("#new_upload").dropzone({
+    dictDefaultMessage : "<%=t :drop_files_here_to_upload%>",
+    dictRemoveFile : "<%=t :remove_file %>",
+    acceptedFiles : '.png,.jpg,.jpeg',
+    addRemoveLinks: true,
+    removedfile: function(file) {
+      $.get( "/uploads/remoted/" + file.id, function( data ) {
+        console.log(data);
+      });
+      var _ref;
+      return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+    },
+    init: function () {
+      this.on("success", function(file, responseText) {
+        file.id = responseText.id;
+      });
+
+      <% for upload in Upload.where(uploadable_type: 'Product', uploadable_id: @product.id, attachment_type: 'product_pictures')%>
+      var mockFile = { name: "<%= upload.attachment_file_name%>", size: <%= upload.attachment_file_size%>, url: "<%= upload.attachment.url%>", id: <%= upload.id%> };
+      this.options.addedfile.call(this, mockFile);
+      this.options.thumbnail.call(this, mockFile, "<%= upload.attachment(:large)%>");
+      mockFile.previewElement.classList.add('dz-success');
+      mockFile.previewElement.classList.add('dz-complete');
+      <%end%>
+    }
+  });
+  </script>
+  <div class="card-footer text-right">
+    <a href='/products/<%= @product.id%>/edit' class="btn btn-lime"><%=t :back%></a>
+    <a href='/products/product_documents/<%= @product.id%>' class="btn btn-primary"><%=t :submit_and_go%></a>
+  </div>
+</div>

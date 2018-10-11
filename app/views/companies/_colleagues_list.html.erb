@@ -1,0 +1,31 @@
+<div id='company_profiles_list'>
+  <div class="table-responsive">
+    <table class="table card-table table-striped table-vcenter">
+      <thead>
+        <tr>
+          <th></th>
+          <th><%=t :fullname%></th>
+          <th><%=t :phonenumber%></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for profile in company.profiles%>
+        <tr>
+          <td class="w-1"><span class="avatar" style="background-image: url(./demo/faces/male/9.jpg)"></span></td>
+          <td><%= profile.fullname%></td>
+          <td><%= profile.phonenumber%></td>
+          <td class="">
+            <%= link_to Membership.where(profile_id: profile.id, company_id: company.id).first, method: :delete, remote: true, data: { confirm: "#{t(:are_you_sure_?)}" } do%>
+              <i class="fe fe-trash"></i>
+            <%end%>
+            <%= link_to edit_profile_path(profile), remote: true do%>
+              <i class="fe fe-edit"></i>
+            <%end%>
+          </td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>

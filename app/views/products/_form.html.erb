@@ -1,0 +1,46 @@
+<%= render partial: 'products/progress_bar', locals: {product: @product, active: ['new_product']}%>
+<%= form_for(@product, html: {class: 'card '}) do |f| %>
+<div class="card-header">
+  <h3 class="card-title"><%=t :new_product %></h3>
+</div>
+<% if @product.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+  <ul>
+    <% @product.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="card-body">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :name, class: "form-label" %>
+        <%= f.text_field :name , class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :description, class: "form-label" %>
+        <%= f.text_area :description , class: "form-control" %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-5">
+      <div class="form-group">
+        <%= f.label :category_id, class: "form-label" %>
+        <%= f.select :category_id, Category.all.collect { |p| [ p.name, p.id ] } , {} ,{ :class => "form-control"}%>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <button type="submit" class="btn btn-primary"><%=t :submit_and_go%></button>
+  </div>
+<% end %>

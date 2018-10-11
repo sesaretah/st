@@ -1,0 +1,69 @@
+<%= form_for(profile, remote: true, html:{id: 'company_profiles_form'}) do |f| %>
+
+<% if profile.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(profile.errors.count, "error") %> prohibited this profile from being saved:</h2>
+
+  <ul>
+    <% profile.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :name, class: "form-label" %>
+      <%= f.text_field :name , class: "form-control" %>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :surename, class: "form-label" %>
+      <%= f.text_field :surename , class: "form-control" %>
+    </div>
+  </div>
+</div>
+<div class="row">
+
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :phonenumber, class: "form-label" , style: 'display: inline-block'%>
+      <label class="custom-switch" style='float: left;'>
+        <input type="checkbox" name="profile[phonenumber_status]" <% if profile.phonenumber_status%>checked<%end%> class="custom-switch-input">
+        <span class="custom-switch-indicator"></span>
+        <span class="custom-switch-description" style='font-size: 60%;'><%=t :view_to_customers%></span>
+      </label>
+      <div class="input-group">
+        <%= f.text_field :phonenumber , class: "form-control", placeholder: "", style: 'direction: ltr;' %>
+        <span class="input-group-prepend" id="basic-addon1">
+          <span class="input-group-text"><i class="fa fa-phone" aria-hidden="true"></i></span>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= f.label :email, class: "form-label"  , style: 'display: inline-block'%>
+      <label class="custom-switch" style='float: left;'>
+        <input type="checkbox" name="profile[email_status]" <% if profile.email_status%>checked<%end%> class="custom-switch-input">
+        <span class="custom-switch-indicator"></span>
+        <span class="custom-switch-description" style='font-size: 60%;'><%=t :view_to_customers%></span>
+      </label>
+      <div class="input-group">
+        <%= f.text_field :email , class: "form-control", placeholder: "", style: 'direction: ltr;' %>
+        <span class="input-group-prepend" id="basic-addon1">
+          <span class="input-group-text">@</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card-footer text-right">
+  <button type="submit" class="btn btn-primary"><%=t :submit%></button>
+</div>
+<% end %>

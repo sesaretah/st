@@ -1,0 +1,41 @@
+<%= form_for(participation, remote: true,  html:{id: 'company_participations_form'}) do |f| %>
+  <% if participation.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(participation.errors.count, "error") %> prohibited this participation from being saved:</h2>
+
+    <ul>
+      <% participation.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+   <div class="row">
+     <div class="col-md-12">
+       <div class="form-group">
+         <%= f.label :exhibition_id, class: "form-label" %>
+         <%= text_area_tag :exhibition_title , nil , class: "typeahead form-control" , id: "autocomplete"%>
+       </div>
+     </div>
+   </div>
+
+  <%= f.hidden_field :exhibition_id , class: "typeahead form-control" , id: "exhibition_id"%>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="form-group">
+        <%= f.label :year, class: "form-label" %>
+        <% @now = {}%>
+        <% if participation.id == nil%>
+        <% @now = JalaliDate.to_jalali(Time.now).year.to_i%>
+        <%else%>
+        <% @now = participation.year_established.to_i %>
+        <%end%>
+        <%= f.select :year, options_for_select(1300..@now, @now), {},{class: "form-control"} %>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <button type="submit" class="btn btn-primary"><%=t :submit%></button>
+  </div>
+  <% end %>

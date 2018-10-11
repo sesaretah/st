@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>St</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="/assets/dashboard.rtl.css"/>
+  <link rel="stylesheet" href="/assets/step.css"/>
+  <link rel="stylesheet" href="/assets/dropzone.css"/>
+  <link rel="stylesheet" href="/assets/noty.css"/>
+  <link rel="stylesheet" href="/assets/relax.css"/>
+  <link rel="stylesheet" href="/assets/jquery-ui.css"/>
+
+</head>
+<body class="">
+  <div class="page">
+    <div class="page-main">
+      <%= render :partial => "layouts/header"%>
+      <div class='my-3 my-md-5'>
+        <div class="container">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+  <script src="/assets/dropzone.js"></script>
+
+</html>

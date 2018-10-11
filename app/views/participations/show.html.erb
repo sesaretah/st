@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Exhibition:</strong>
+  <%= @participation.exhibition_id %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @participation.company_id %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @participation.year %>
+</p>
+
+<%= link_to 'Edit', edit_participation_path(@participation) %> |
+<%= link_to 'Back', participations_path %>

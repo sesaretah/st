@@ -1,0 +1,8 @@
+<ul class="progressbar">
+    <li <% if active.include?('new_product')%> class="active" <%end%>><%=t :new_product %></li>
+    <li <% if active.include?('product_pictures')%> class="active" <%end%>><%=t :product_pictures%></li>
+    <li <% if active.include?('product_documents')%> class="active" <%end%>><%=t :product_documents%></li>
+    <li <% if active.include?('packaging_and_shipppment')%> class="active" <%end%>><%=t :packaging_and_shipppment%></li>
+    <li <% if active.include?('product_customers')%> class="active" <%end%>><%=t :product_customers%></li>
+    <li <% if active.include?('product_faq')%> class="active" <%end%>><%=t :product_faq%></li>
+</ul>

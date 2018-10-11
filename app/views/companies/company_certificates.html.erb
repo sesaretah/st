@@ -1,0 +1,22 @@
+<%= render partial: 'companies/progress_bar', locals: {company: @company, active: ['new_company', 'company_colleagues', 'company_exhibitions', 'company_certificates']}%>
+<div class="card">
+  <div class="card-header">
+    <h3 class="card-title"><%=t :company_certificates%></h3>
+  </div>
+  <div class="card-body">
+    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt,
+    iste, itaque minima neque pariatur perferendis sed suscipit velit vitae voluptatem.
+    A consequuntur, deserunt eaque error nulla temporibus!
+    <div class="text-wrap">
+      <ul>
+        <li>In fermentum leo eu lectus mollis, quis dictum mi aliquet.</li>
+        <li>Morbi eu nulla lobortis, lobortis est in, fringilla felis.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card-footer text-right">
+    <a href='/companies/company_exhibitions/<%= @company.id%>' class="btn btn-lime"><%=t :back%></a>
+    <a href='/companies/company_album/<%= @company.id%>' class="btn btn-primary"><%=t :submit_and_go%></a>
+  </div>
+</div>

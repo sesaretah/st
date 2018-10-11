@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Headquarter address:</strong>
+  <%= @company.headquarter_address %>
+</p>
+
+<p>
+  <strong>Shop address:</strong>
+  <%= @company.shop_address %>
+</p>
+
+<p>
+  <strong>Factory address:</strong>
+  <%= @company.factory_address %>
+</p>
+
+<p>
+  <strong>Telphone:</strong>
+  <%= @company.telphone %>
+</p>
+
+<p>
+  <strong>Fax:</strong>
+  <%= @company.fax %>
+</p>
+
+<p>
+  <strong>Email:</strong>
+  <%= @company.email %>
+</p>
+
+<p>
+  <strong>Telegram channel:</strong>
+  <%= @company.telegram_channel %>
+</p>
+
+<p>
+  <strong>Instagram page:</strong>
+  <%= @company.instagram_page %>
+</p>
+
+<p>
+  <strong>Year established:</strong>
+  <%= @company.year_established %>
+</p>
+
+<p>
+  <strong>Total employees:</strong>
+  <%= @company.total_employees %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @company.user_id %>
+</p>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>
