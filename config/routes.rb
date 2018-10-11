@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   match "/companies/company_catalogs/:id" => "companies#company_catalogs", :via => :get
 
   match "/exhibitions/search/:id"  => "exhibitions#search", :via => :get
+  match "/certifications/search/:id"  => "certifications#search", :via => :get
 
   match "/uploads/remoted/:id" => "uploads#remoted", :via => :get
 end

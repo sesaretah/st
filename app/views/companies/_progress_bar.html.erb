@@ -4,7 +4,7 @@
       <li <% if active.include?('company_colleagues')%> class="active" <%end%>><%= link_to t(:colleagues), '/companies/company_colleagues/'+ company.id.to_s %></li>
       <li <% if active.include?('company_exhibitions')%> class="active" <%end%>><%= link_to t(:company_exhibitions), '/companies/company_exhibitions/'+ company.id.to_s %></li>
       <li <% if active.include?('company_certificates')%> class="active" <%end%>><%= link_to t(:company_certificates), '/companies/company_certificates/'+ company.id.to_s %></li>
+      <li <% if active.include?('company_honors')%> class="active" <%end%>><%= link_to t(:company_honors), '/companies/company_honors/'+ company.id.to_s %></li>
       <li <% if active.include?('company_album')%> class="active" <%end%>><%= link_to t(:company_album), '/companies/company_album/'+ company.id.to_s %></li>
-      <li <% if active.include?('company_catalogs')%> class="active" <%end%>><%= link_to t(:company_catalogs), '/companies/company_catalogs/'+ company.id.to_s %></li>
   </ul>
 </div>

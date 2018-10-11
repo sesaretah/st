@@ -299,6 +299,12 @@ fa:
   you_can_now_edit_participation: 'اکنون می توانید ویرایش کنید'
   participation_updated_successfully: 'اطلاعات با موفقیت بروزرسانی شد.'
   participation_destroyed_successfully: 'عملیات حذف با موفقیت انجام شد.'
+  certifications_list: 'لیست گواهینامه‌ها و جوازهای شما'
+  you_can_now_edit_earning: 'اکنون می توانید ویرایش کنید'
+  earning_added_successfully: 'اطلاعات با موفقیت بروزرسانی شد.'
+  earning_destroyed_successfully: 'عملیات حذف با موفقیت انجام شد.'
+  certifications_pictures: 'عکس از گواهینامه‌ها و مجوزها'
+  company_honors: 'افتخارات و جوایز'
   devise:
     confirmations:
       confirmed: حسابتان با موفقیت تایید شد. هم اکنون وارد شدید.

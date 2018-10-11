@@ -19,6 +19,33 @@ function fireThisUponEvent(event) {
       }
     });
   });
+
+  $( function() {
+    $( ".certification_title" ).autocomplete({
+      source: function( request, response ) {
+        $.ajax({
+          url: "/certifications/search/1",
+          dataType: "jsonp",
+          data: {
+            query: request.term
+          },
+          success: function( data ) {
+            console.log(data);
+            if (data === undefined || data.length == 0) {
+                $('#cert_id').val('');
+            }
+          response( data );
+
+          }
+        });
+      },
+      minLength: 2,
+      select: function(event, ui) {
+          $('#cert_id').val(ui.item.id);
+      }
+    });
+  });
+
   $.extend($.ui.autocomplete.prototype.options, {
   open: function(event, ui) {
    $(this).autocomplete("widget").css({
@@ -27,16 +54,8 @@ function fireThisUponEvent(event) {
    }
   });
 
-  jQuery(function($) {
-    var input = $('.exhibition_title');
-    input.on('keydown', function() {
-      var key = event.keyCode || event.charCode;
-      if( key == 8 || key == 46 )
-
-        $('#exhibition_id').val('');
-    });
-  });
 }
 $(document).on('turbolinks:load', fireThisUponEvent)
 $(document).ready(fireThisUponEvent);
 $(document).on("focus", ".exhibition_title",  fireThisUponEvent)
+$(document).on("focus", ".certification_title",  fireThisUponEvent)

@@ -46,10 +46,17 @@ class EarningsController < ApplicationController
   # PATCH/PUT /earnings/1
   # PATCH/PUT /earnings/1.json
   def update
+    if params[:earning][:certification_id].blank?
+      @certification = Certification.create(title: params[:certification_title])
+      @earning.certification_id = @certification.id
+    end
+    @company = current_user.company
+    @earning.company_id = current_user.company.id
     respond_to do |format|
       if @earning.update(earning_params)
         format.html { redirect_to @earning, notice: 'Earning was successfully updated.' }
         format.json { render :show, status: :ok, location: @earning }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @earning.errors, status: :unprocessable_entity }
@@ -60,10 +67,12 @@ class EarningsController < ApplicationController
   # DELETE /earnings/1
   # DELETE /earnings/1.json
   def destroy
+    @company = current_user.company
     @earning.destroy
     respond_to do |format|
       format.html { redirect_to earnings_url, notice: 'Earning was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 

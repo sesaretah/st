@@ -25,18 +25,18 @@
      </div>
    </div>
 
-  <%= f.hidden_field :certification_id , class: "typeahead form-control" , id: "certification_id"%>
+  <%= f.hidden_field :certification_id , class: "typeahead form-control certification_id" , id: "cert_id"%>
   <div class="row">
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :start_year, class: "form-label" %>
-        <% @now = {}%>
+        <% @start_year = {}%>
         <% if earning.id == nil%>
-        <% @now = JalaliDate.to_jalali(Time.now).year.to_i%>
+        <% @start_year = JalaliDate.to_jalali(Time.now).year.to_i%>
         <%else%>
-        <% @now = earning.start_year.to_i %>
+        <% @start_year = earning.start_year.to_i %>
         <%end%>
-        <%= f.select :start_year, options_for_select((1300..@now).reverse_each), {:include_blank => true},{class: "form-control"} %>
+        <%= f.select :start_year, options_for_select((1300..@start_year).reverse_each, @start_year), {:include_blank => true},{class: "form-control"} %>
       </div>
     </div>
   </div>
@@ -45,13 +45,13 @@
     <div class="col-md-4">
       <div class="form-group">
         <%= f.label :end_year, class: "form-label" %>
-        <% @now = {}%>
+        <% @end_year = {}%>
         <% if earning.id == nil%>
-        <% @now = JalaliDate.to_jalali(Time.now).year.to_i%>
+        <% @end_year = JalaliDate.to_jalali(Time.now).year.to_i%>
         <%else%>
-        <% @now = earning.end_year.to_i %>
+        <% @end_year = earning.end_year.to_i %>
         <%end%>
-        <%= f.select :end_year, options_for_select((1300..@now).reverse_each), {:include_blank => true},{class: "form-control"} %>
+        <%= f.select :end_year, options_for_select((1300..@end_year).reverse_each, @end_year), {:include_blank => true},{class: "form-control"} %>
       </div>
     </div>
   </div>
