@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :earnings
+  resources :certifications
   resources :participations
   resources :exhibitions
   resources :memberships

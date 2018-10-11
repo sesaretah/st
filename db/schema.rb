@@ -11,10 +11,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181004093508) do
+ActiveRecord::Schema.define(version: 20181011102353) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
+  end
+
+  create_table "certifications", force: :cascade do |t|
+    t.string   "title",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
   end
@@ -34,6 +40,15 @@ ActiveRecord::Schema.define(version: 20181004093508) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.string   "name",                limit: 255
+  end
+
+  create_table "earnings", force: :cascade do |t|
+    t.integer  "certification_id", limit: 4
+    t.integer  "company_id",       limit: 4
+    t.string   "start_year",       limit: 255
+    t.string   "end_year",         limit: 255
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
   end
 
   create_table "exhibitions", force: :cascade do |t|

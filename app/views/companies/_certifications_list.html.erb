@@ -1,0 +1,30 @@
+<div id='company_certifications_list'>
+  <div class="table-responsive">
+    <table class="table card-table table-striped table-vcenter">
+      <thead>
+        <tr>
+          <th><%=t :title%></th>
+          <th><%=t :year%></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for earning in company.earnings%>
+        <% @certification = Certification.find(earning.certification_id)%>
+        <tr>
+          <td><small><%= truncate(@certification.title, length: 50) %></small></td>
+          <td><%= participation.year%></td>
+          <td class="">
+            <%= link_to earning, method: :delete, remote: true, data: { confirm: "#{t(:are_you_sure_?)}" } do%>
+              <i class="fe fe-trash"></i>
+            <%end%>
+            <%= link_to edit_earning_path(earning), remote: true do%>
+              <i class="fe fe-edit"></i>
+            <%end%>
+          </td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>

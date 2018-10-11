@@ -5,5 +5,8 @@ class Company < ActiveRecord::Base
   has_many :participations, dependent: :destroy
   has_many :exhibitions, :through => :participations
 
+  has_many :earnings, dependent: :destroy
+  has_many :certifications, :through => :earnings
+
   belongs_to :user
 end

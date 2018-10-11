@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Certification:</strong>
+  <%= @earning.certification_id %>
+</p>
+
+<p>
+  <strong>Company:</strong>
+  <%= @earning.company_id %>
+</p>
+
+<p>
+  <strong>Start year:</strong>
+  <%= @earning.start_year %>
+</p>
+
+<p>
+  <strong>End year:</strong>
+  <%= @earning.end_year %>
+</p>
+
+<%= link_to 'Edit', edit_earning_path(@earning) %> |
+<%= link_to 'Back', earnings_path %>

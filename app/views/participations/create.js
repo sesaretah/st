@@ -5,5 +5,5 @@ new Noty({
     theme    : 'relax',
     timeout: 2000,
     layout: 'bottomLeft',
-    text: '<%=t :profile_added_successfully%>'
+    text: '<%=t :participation_added_successfully%>'
 }).show();

@@ -19,6 +19,7 @@ class ParticipationsController < ApplicationController
 
   # GET /participations/1/edit
   def edit
+    @company = current_user.company
   end
 
   # POST /participations
@@ -46,10 +47,17 @@ class ParticipationsController < ApplicationController
   # PATCH/PUT /participations/1
   # PATCH/PUT /participations/1.json
   def update
+    if params[:participation][:exhibition_id].blank?
+      @exhibition = Exhibition.create(title: params[:exhibition_title])
+      @participation.exhibition_id = @exhibition.id
+    end
+    @company = current_user.company
+    @participation.company_id = current_user.company.id
     respond_to do |format|
       if @participation.update(participation_params)
         format.html { redirect_to @participation, notice: 'Participation was successfully updated.' }
         format.json { render :show, status: :ok, location: @participation }
+        format.js
       else
         format.html { render :edit }
         format.json { render json: @participation.errors, status: :unprocessable_entity }
@@ -60,10 +68,12 @@ class ParticipationsController < ApplicationController
   # DELETE /participations/1
   # DELETE /participations/1.json
   def destroy
+    @company = current_user.company
     @participation.destroy
     respond_to do |format|
       format.html { redirect_to participations_url, notice: 'Participation was successfully destroyed.' }
       format.json { head :no_content }
+      format.js
     end
   end
 

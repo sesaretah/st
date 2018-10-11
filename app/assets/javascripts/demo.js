@@ -1,6 +1,6 @@
-$(document).on('turbolinks:load', function() {
+function fireThisUponEvent(event) {
   $( function() {
-    $( "#autocomplete" ).autocomplete({
+    $( ".exhibition_title" ).autocomplete({
       source: function( request, response ) {
         $.ajax({
           url: "/exhibitions/search/1",
@@ -9,7 +9,6 @@ $(document).on('turbolinks:load', function() {
             query: request.term
           },
           success: function( data ) {
-            console.log(data);
             response( data );
           }
         });
@@ -29,13 +28,15 @@ $(document).on('turbolinks:load', function() {
   });
 
   jQuery(function($) {
-    var input = $('#autocomplete');
+    var input = $('.exhibition_title');
     input.on('keydown', function() {
       var key = event.keyCode || event.charCode;
-      console.log(key);
       if( key == 8 || key == 46 )
 
         $('#exhibition_id').val('');
     });
   });
-})
+}
+$(document).on('turbolinks:load', fireThisUponEvent)
+$(document).ready(fireThisUponEvent);
+$(document).on("focus", ".exhibition_title",  fireThisUponEvent)

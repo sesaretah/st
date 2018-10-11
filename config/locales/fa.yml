@@ -237,6 +237,10 @@ fa:
         participation:
           exhibition_id: 'عنوان نمایشگاه'
           year: 'سال'
+        earning:
+          certification_id: 'عنوان گواهینامه یا جواز'
+          start_year: 'سال شروع'
+          end_year: 'سال پایان'
         user:
             email: 'ایمیل'
             login: 'نام کاربر'
@@ -291,6 +295,10 @@ fa:
   exhibitions_list: 'لیست مشارکت های شما'
   title: 'عنوان'
   year: 'سال'
+  participation_added_successfully: 'مشارکت با موفقیت افزوده شد.'
+  you_can_now_edit_participation: 'اکنون می توانید ویرایش کنید'
+  participation_updated_successfully: 'اطلاعات با موفقیت بروزرسانی شد.'
+  participation_destroyed_successfully: 'عملیات حذف با موفقیت انجام شد.'
   devise:
     confirmations:
       confirmed: حسابتان با موفقیت تایید شد. هم اکنون وارد شدید.

@@ -1,0 +1,39 @@
+<div class="row row-cards">
+  <div class="col-lg-3">
+    <div class="row">
+      <div class="col-md-6 col-lg-12">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-12">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="card">
+      <table class="table card-table table-vcenter">
+    <tbody>
+      <% @earnings.each do |earning| %>
+      <tr>
+            <td><%= earning.certification_id %></td>
+            <td><%= earning.company_id %></td>
+            <td><%= earning.start_year %></td>
+            <td><%= earning.end_year %></td>
+            <td><%= link_to t(:show), earning %></td>
+      <td><%= link_to t(:edit), edit_earning_path(earning) %></td>
+      <td><%= link_to t(:destroy), earning, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+</div>

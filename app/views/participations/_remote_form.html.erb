@@ -15,7 +15,12 @@
      <div class="col-md-12">
        <div class="form-group">
          <%= f.label :exhibition_id, class: "form-label" %>
-         <%= text_area_tag :exhibition_title , nil , class: "typeahead form-control" , id: "autocomplete"%>
+         <% if participation.id != nil%>
+         <% @exhibition_title = Exhibition.find_by_id(participation.exhibition_id).title%>
+         <%else%>
+         <% @exhibition_title =  ''%>
+         <%end%>
+         <%= text_area_tag :exhibition_title , @exhibition_title , class: "typeahead form-control exhibition_title" , id: "autocomplete"%>
        </div>
      </div>
    </div>
@@ -29,7 +34,7 @@
         <% if participation.id == nil%>
         <% @now = JalaliDate.to_jalali(Time.now).year.to_i%>
         <%else%>
-        <% @now = participation.year_established.to_i %>
+        <% @now = participation.year.to_i %>
         <%end%>
         <%= f.select :year, options_for_select(1300..@now, @now), {},{class: "form-control"} %>
       </div>
