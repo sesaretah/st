@@ -464,8 +464,10 @@ mark,
 }
 
 .list-inline-item:not(:last-child) {
-  margin-left: 0.5rem;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }
+
 
 .initialism {
   font-size: 90%;

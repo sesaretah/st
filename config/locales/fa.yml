@@ -237,6 +237,9 @@ fa:
         participation:
           exhibition_id: 'عنوان نمایشگاه'
           year: 'سال'
+        honor:
+          title: 'عنوان'
+          year: 'سال'
         earning:
           certification_id: 'عنوان گواهینامه یا جواز'
           start_year: 'سال شروع'
@@ -305,6 +308,13 @@ fa:
   earning_destroyed_successfully: 'عملیات حذف با موفقیت انجام شد.'
   certifications_pictures: 'عکس از گواهینامه‌ها و مجوزها'
   company_honors: 'افتخارات و جوایز'
+  honor_added_successfully: 'با موفقیت ثبت شد'
+  honors_pictures: 'عکس از افتخارات و جوایز'
+  honors_list: 'لیست افتخارات و جوایز'
+  you_can_now_edit_honor:  'اکنون می توانید ویرایش کنید'
+  honor_updated_successfully: 'اطلاعات با موفقیت بروزرسانی شد.'
+  honor_destroyed_successfully: 'عملیات حذف با موفقیت انجام شد.'
+  company_album_pictures: 'عکس از محیط کار و فرآیند انجام آن'
   devise:
     confirmations:
       confirmed: حسابتان با موفقیت تایید شد. هم اکنون وارد شدید.

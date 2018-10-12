@@ -1,0 +1,45 @@
+<%= form_for(@honor, html: {class: 'card'}) do |f| %>
+<div class="card-header">
+  <h3 class="card-title"><%=t :new_honor %></h3>
+</div>
+<% if @honor.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@honor.errors.count, "error") %> prohibited this honor from being saved:</h2>
+
+  <ul>
+    <% @honor.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="card-body">
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+          <%= f.label :title, class: "form-label" %>
+      <%= f.text_field :title , class: "form-control" %>
+          </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+          <%= f.label :year, class: "form-label" %>
+      <%= f.text_field :year , class: "form-control" %>
+          </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+          <%= f.label :company_id, class: "form-label" %>
+      <%= f.number_field :company_id , class: "form-control" %>
+          </div>
+  </div>
+</div>
+<div class="card-footer text-right">
+  <button type="submit" class="btn btn-primary"><%=t :submit%></button>
+</div>
+<% end %>

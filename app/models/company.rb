@@ -8,5 +8,7 @@ class Company < ActiveRecord::Base
   has_many :earnings, dependent: :destroy
   has_many :certifications, :through => :earnings
 
+  has_many :honors
+
   belongs_to :user
 end

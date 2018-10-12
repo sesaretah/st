@@ -1,5 +1,5 @@
 class CompaniesController < ApplicationController
-  before_action :set_company, only: [:show, :edit, :update, :destroy, :company_colleagues, :company_exhibitions, :company_certificates, :company_album, :company_catalogs]
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :company_colleagues, :company_exhibitions, :company_certificates, :company_album, :company_catalogs, :company_honors]
   def company_colleagues
   end
 
@@ -13,6 +13,9 @@ class CompaniesController < ApplicationController
   end
 
   def company_catalogs
+  end
+
+  def company_honors
   end
 
 

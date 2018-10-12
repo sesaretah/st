@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :honors
   resources :earnings
   resources :certifications
   resources :participations
@@ -24,6 +25,7 @@ Rails.application.routes.draw do
   match "/companies/company_certificates/:id" => "companies#company_certificates", :via => :get
   match "/companies/company_album/:id" => "companies#company_album", :via => :get
   match "/companies/company_catalogs/:id" => "companies#company_catalogs", :via => :get
+  match "/companies/company_honors/:id" => "companies#company_honors", :via => :get
 
   match "/exhibitions/search/:id"  => "exhibitions#search", :via => :get
   match "/certifications/search/:id"  => "certifications#search", :via => :get

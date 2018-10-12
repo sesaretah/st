@@ -1,7 +1,7 @@
-<%= render partial: 'companies/progress_bar', locals: {company: @company, active: ['new_company', 'company_colleagues', 'company_exhibitions', 'company_certificates',  'company_honors' ,'company_album']}%>
+<%= render partial: 'companies/progress_bar', locals: {company: @company, active: ['new_company', 'company_colleagues', 'company_exhibitions', 'company_certificates', 'company_honors']}%>
 <div class="card">
   <div class="card-header">
-    <h3 class="card-title"><%=t :company_album%></h3>
+    <h3 class="card-title"><%=t :company_honors%></h3>
   </div>
   <div class="card-body">
     Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam deleniti fugit incidunt,
@@ -16,29 +16,51 @@
   </div>
 
   <div class="card-footer text-right">
-    <a href='/companies/company_exhibitions/<%= @company.id%>' class="btn btn-lime"><%=t :back%></a>
-    <a href='/companies/<%= @company.id%>' class="btn btn-primary"><%=t :submit_and_view%></a>
+    <a href='/companies/company_certificates/<%= @company.id%>' class="btn btn-lime"><%=t :back%></a>
+    <a href='/companies/company_album/<%= @company.id%>' class="btn btn-primary"><%=t :submit_and_go%></a>
   </div>
 </div>
 
+<div class='row row-cards row-deck'>
+  <div  class='col-sm-6 col-lg-6'>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :company_honors%></h3>
+      </div>
+      <div class="card-status card-status-left bg-blue"></div>
+      <div class="card-body">
+        <%= render partial: 'honors/remote_form', locals: {company: @company, honor: Honor.new}%>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-sm-6 col-lg-6'>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :honors_list%></h3>
+      </div>
+      <%= render partial: 'companies/honors_list', locals: {company: @company}%>
+    </div>
+  </div>
+</div>
 
 <div class='row row-cards row-deck'>
   <div class='col-sm-12 col-lg-12'>
     <div class="card">
       <div class="card-header">
-        <h3 class="card-title"><%=t :company_album_pictures%></h3>
+        <h3 class="card-title"><%=t :honors_pictures%></h3>
       </div>
       <div class="card-body">
         <%= form_for(Upload.new, html: {class: 'dropzone'}) do |f| %>
         <%= f.hidden_field :uploadable_type, value: 'Company'%>
         <%= f.hidden_field :uploadable_id, value: @company.id%>
-        <%= f.hidden_field :attachment_type, value: 'company_album'%>
+        <%= f.hidden_field :attachment_type, value: 'honors_pictures'%>
         <%= hidden_field_tag :file_type, 'picture'%>
         <div class="fallback">
           <%= f.file_field :picture %><br>
           <%= f.hidden_field :uploadable_type, value: 'Company'%>
           <%= f.hidden_field :uploadable_id, value: @company.id%>
-          <%= f.hidden_field :attachment_type, value: 'company_album'%>
+          <%= f.hidden_field :attachment_type, value: 'honors_pictures'%>
           <%= f.submit "Upload" %>
         </div>
         <% end %>
@@ -61,7 +83,7 @@
               file.id = responseText.id;
             });
 
-            <% for upload in Upload.where(uploadable_type: 'Company', uploadable_id: @company.id, attachment_type: 'company_album')%>
+            <% for upload in Upload.where(uploadable_type: 'Company', uploadable_id: @company.id, attachment_type: 'honors_pictures')%>
             var mockFile = { name: "<%= upload.attachment_file_name%>", size: <%= upload.attachment_file_size%>, url: "<%= upload.attachment.url%>", id: <%= upload.id%> };
             this.options.addedfile.call(this, mockFile);
             this.options.thumbnail.call(this, mockFile, "<%= upload.attachment(:large)%>");

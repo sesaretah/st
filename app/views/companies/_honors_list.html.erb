@@ -1,0 +1,29 @@
+<div id='company_honors_list'>
+  <div class="table-responsive">
+    <table class="table card-table table-striped table-vcenter">
+      <thead>
+        <tr>
+          <th><%=t :title%></th>
+          <th><%=t :year%></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for honor in company.honors%>
+        <tr>
+          <td><small><%= truncate(honor.title, length: 50) %></small></td>
+          <td><%= honor.year%></td>
+          <td class="">
+            <%= link_to honor, method: :delete, remote: true, data: { confirm: "#{t(:are_you_sure_?)}" } do%>
+              <i class="fe fe-trash"></i>
+            <%end%>
+            <%= link_to edit_honor_path(honor), remote: true do%>
+              <i class="fe fe-edit"></i>
+            <%end%>
+          </td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>
