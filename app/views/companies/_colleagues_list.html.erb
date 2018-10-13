@@ -5,18 +5,19 @@
         <tr>
           <th></th>
           <th><%=t :fullname%></th>
-          <th><%=t :phonenumber%></th>
+          <th><%=t :role_id%></th>
           <th></th>
         </tr>
       </thead>
       <tbody>
         <% for profile in company.profiles%>
+        <% @membership = Membership.where(profile_id: profile.id, company_id: company.id).first%>
         <tr>
           <td class="w-1"><span class="avatar" style="background-image: url(./demo/faces/male/9.jpg)"></span></td>
           <td><%= profile.fullname%></td>
-          <td><%= profile.phonenumber%></td>
+          <td><%= @membership.role.title%></td>
           <td class="">
-            <%= link_to Membership.where(profile_id: profile.id, company_id: company.id).first, method: :delete, remote: true, data: { confirm: "#{t(:are_you_sure_?)}" } do%>
+            <%= link_to @membership, method: :delete, remote: true, data: { confirm: "#{t(:are_you_sure_?)}" } do%>
               <i class="fe fe-trash"></i>
             <%end%>
             <%= link_to edit_profile_path(profile), remote: true do%>

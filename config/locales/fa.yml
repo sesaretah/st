@@ -209,7 +209,7 @@ fa:
             nickname: "اسم مستعار"
             fathername: 'نام پدر'
             ssn: 'کد ملی'
-            phonenumber: 'تلفن'
+            phonenumber: 'تلفن همراه'
             mobilenumber: 'شماره همراه'
             official_email: 'ایمیل دانشگاهی'
             faculty: 'دانشکده'
@@ -230,6 +230,9 @@ fa:
           factory_address: 'آدرس کارخانه/کارگاه'
         category:
           name: 'عنوان'
+        role:
+          title: 'عنوان'
+          priority: 'اولویت'
         product:
           name: 'نام'
           description: 'شرح'
@@ -282,7 +285,7 @@ fa:
   company_catalogs: 'کاتالوگ ها'
   company_colleagues: 'همکاران'
   new_company: 'شرکت/بنگاه جدید'
-  new_colleague: 'افزودن مدیر جدید'
+  new_colleague: 'افزودن مدیر یا همکار جدید'
   colleagues: 'مدیران و همکاران مجموعه'
   company_info: 'اطلاعات شرکت/بنگاه اقتصادی'
   fullname: 'نام و نام خانوادگی'
@@ -315,6 +318,10 @@ fa:
   honor_updated_successfully: 'اطلاعات با موفقیت بروزرسانی شد.'
   honor_destroyed_successfully: 'عملیات حذف با موفقیت انجام شد.'
   company_album_pictures: 'عکس از محیط کار و فرآیند انجام آن'
+  company_info: 'اطلاعات شرکت/بنگاه اقتصادی'
+  new_role: 'نقش جدید'
+  role_id: 'نقش'
+  profile_already_exists: 'کاربری با این شماره وجود دارد'
   devise:
     confirmations:
       confirmed: حسابتان با موفقیت تایید شد. هم اکنون وارد شدید.

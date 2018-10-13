@@ -34,7 +34,7 @@
     <div class="form-group">
       <%= f.label :phonenumber, class: "form-label" , style: 'display: inline-block'%>
       <label class="custom-switch" style='float: left;'>
-        <input type="checkbox" name="profile[phonenumber_status]" <% if profile.phonenumber_status%>checked<%end%> class="custom-switch-input">
+        <input type="checkbox" name="profile[phonenumber_status]" id='phonenumber_status' <% if profile.phonenumber_status%>checked<%end%> class="custom-switch-input">
         <span class="custom-switch-indicator"></span>
         <span class="custom-switch-description" style='font-size: 60%;'><%=t :view_to_customers%></span>
       </label>
@@ -50,7 +50,7 @@
     <div class="form-group">
       <%= f.label :email, class: "form-label"  , style: 'display: inline-block'%>
       <label class="custom-switch" style='float: left;'>
-        <input type="checkbox" name="profile[email_status]" <% if profile.email_status%>checked<%end%> class="custom-switch-input">
+        <input type="checkbox" name="profile[email_status]" id='email_status' <% if profile.email_status%>checked<%end%> class="custom-switch-input">
         <span class="custom-switch-indicator"></span>
         <span class="custom-switch-description" style='font-size: 60%;'><%=t :view_to_customers%></span>
       </label>
@@ -62,8 +62,58 @@
       </div>
     </div>
   </div>
+
 </div>
+<div class='row'>
+  <div class="col-md-6">
+    <div class="form-group">
+      <%= label_tag t(:role_id), nil,class: "form-label" %>
+      <%= select_tag :role_id, options_for_select(Role.all.collect{ |u| [u.title, u.id] }), :class => "form-control"%>
+
+    </div>
+  </div>
+</div>
+<%= hidden_field_tag 'profile_id', value: ''%>
 <div class="card-footer text-right">
   <button type="submit" class="btn btn-primary"><%=t :submit%></button>
 </div>
 <% end %>
+<script>
+$('#profile_phonenumber').on('keyup',function(){
+  if ($(this).val().length == 11){
+    $.ajax({
+      url: '/profiles/mobile_search/1',
+      data: {q: $(this).val()},
+      success: function(d) {
+        if (d != null && d.length != 0) {
+          console.log(d);
+          $('#company_profiles_form').attr('action', "/profiles/" + d['id']);
+          $("#company_profiles_form").append("<input type='hidden' name='_method' value='patch'>");
+          $('#profile_name').val(d['name']);
+          $('#profile_surename').val(d['surename']);
+          $('#profile_email').val(d['email']);
+          $('#profile_name').attr("disabled", "disabled");
+          $('#profile_surename').attr("disabled", "disabled");
+          $('#profile_email').attr("disabled", "disabled");
+          $('#profile_id').val(d['id']);
+          if (d['phonenumber_status'] == 1)
+          {
+            $('#phonenumber_status').attr("checked", "checked");
+          }
+          if (d['email_status'] == 1)
+          {
+            $('#email_status').attr("checked", "checked");
+          }
+          new Noty({
+              type: 'warning',
+              theme    : 'relax',
+              timeout: 3000,
+              layout: 'bottomLeft',
+              text: '<%=t :profile_already_exists%>'
+          }).show();
+        }
+      }
+    });
+  }
+});
+</script>

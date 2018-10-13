@@ -72,6 +72,6 @@ class MembershipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def membership_params
-      params.require(:membership).permit(:profile_id, :company_id)
+      params.require(:membership).permit(:profile_id, :company_id, :adder_id, :role_id)
     end
 end

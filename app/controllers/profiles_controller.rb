@@ -1,6 +1,10 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
+  def mobile_search
+    @profile = Profile.where(phonenumber: params[:q]).first
+    render :json => @profile.to_json, :callback => params['callback']
+  end
   # GET /profiles
   # GET /profiles.json
   def index
@@ -27,9 +31,10 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @company = current_user.company
+    @role = Role.find(params[:role_id])
     respond_to do |format|
       if @profile.save
-        Membership.create(profile_id: @profile.id, company_id: @company.id)
+        Membership.create(profile_id: @profile.id, company_id: @company.id, adder_id: current_user.id, role_id: @role.id)
         format.html { redirect_to @profile, notice: 'Profile was successfully created.' }
         format.json { render :show, status: :created, location: @profile }
         format.js

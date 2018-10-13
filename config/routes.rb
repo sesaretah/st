@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :roles
   resources :honors
   resources :earnings
   resources :certifications
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
 
   match "/exhibitions/search/:id"  => "exhibitions#search", :via => :get
   match "/certifications/search/:id"  => "certifications#search", :via => :get
+
+  match "/profiles/mobile_search/:id" => "profiles#mobile_search", :via => :get
 
   match "/uploads/remoted/:id" => "uploads#remoted", :via => :get
 end
