@@ -1,0 +1,69 @@
+<%= form_for(@packaging, html: {class: 'card'}) do |f| %>
+<div class="card-header">
+  <h3 class="card-title"><%=t :new_packaging %></h3>
+</div>
+<% if @packaging.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@packaging.errors.count, "error") %> prohibited this packaging from being saved:</h2>
+
+  <ul>
+    <% @packaging.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="card-body">
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+          <%= f.label :dimensions, class: "form-label" %>
+      <%= f.text_field :dimensions , class: "form-control" %>
+          </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+          <%= f.label :weight, class: "form-label" %>
+      <%= f.text_field :weight , class: "form-control" %>
+          </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+          <%= f.label :weight_scale, class: "form-label" %>
+      <%= f.text_field :weight_scale , class: "form-control" %>
+          </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+          <%= f.label :packaging_type, class: "form-label" %>
+      <%= f.number_field :packaging_type , class: "form-control" %>
+          </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+          <%= f.label :color, class: "form-label" %>
+      <%= f.text_field :color , class: "form-control" %>
+          </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+          <%= f.label :delivery_detail, class: "form-label" %>
+      <%= f.text_area :delivery_detail , class: "form-control" %>
+          </div>
+  </div>
+</div>
+<div class="card-footer text-right">
+  <button type="submit" class="btn btn-primary"><%=t :submit%></button>
+</div>
+<% end %>

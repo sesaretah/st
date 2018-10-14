@@ -254,6 +254,13 @@ fa:
         customer:
           name: 'نام مشتری (حقیقی/حقوقی)'
           phone_number: 'شماره تلفن'
+        packaging:
+          dimensions: 'ابعاد'
+          weight: 'وزن'
+          weight_scale: 'معیار وزن'
+          packaging_type: 'نوع بسته بندی'
+          color: 'رنگ'
+          delivery_detail: 'جزئیات تحویل'
         user:
             email: 'ایمیل'
             login: 'نام کاربر'
@@ -290,10 +297,10 @@ fa:
   company_certificates: 'گواهینامه‌ها و جوازها'
   company_album: 'آلبوم عکس'
   company_catalogs: 'کاتالوگ ها'
-  company_colleagues: 'همکاران'
+  company_colleagues: 'مدیران'
   new_company: 'شرکت/بنگاه جدید'
-  new_colleague: 'افزودن مدیر یا همکار جدید'
-  colleagues: 'مدیران و همکاران مجموعه'
+  new_colleague: 'افزودن مدیران'
+  colleagues: 'مدیران'
   company_info: 'اطلاعات شرکت/بنگاه اقتصادی'
   fullname: 'نام و نام خانوادگی'
   phonenumber: 'شماره تلفن'

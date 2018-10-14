@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dimensions:</strong>
+  <%= @packaging.dimensions %>
+</p>
+
+<p>
+  <strong>Weight:</strong>
+  <%= @packaging.weight %>
+</p>
+
+<p>
+  <strong>Weight scale:</strong>
+  <%= @packaging.weight_scale %>
+</p>
+
+<p>
+  <strong>Packaging type:</strong>
+  <%= @packaging.packaging_type %>
+</p>
+
+<p>
+  <strong>Color:</strong>
+  <%= @packaging.color %>
+</p>
+
+<p>
+  <strong>Delivery detail:</strong>
+  <%= @packaging.delivery_detail %>
+</p>
+
+<%= link_to 'Edit', edit_packaging_path(@packaging) %> |
+<%= link_to 'Back', packagings_path %>

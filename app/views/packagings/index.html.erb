@@ -1,0 +1,41 @@
+<div class="row row-cards">
+  <div class="col-lg-3">
+    <div class="row">
+      <div class="col-md-6 col-lg-12">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-12">
+        <div class="card">
+          <div class="card-body">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-9">
+    <div class="card">
+      <table class="table card-table table-vcenter">
+    <tbody>
+      <% @packagings.each do |packaging| %>
+      <tr>
+            <td><%= packaging.dimensions %></td>
+            <td><%= packaging.weight %></td>
+            <td><%= packaging.weight_scale %></td>
+            <td><%= packaging.packaging_type %></td>
+            <td><%= packaging.color %></td>
+            <td><%= packaging.delivery_detail %></td>
+            <td><%= link_to t(:show), packaging %></td>
+      <td><%= link_to t(:edit), edit_packaging_path(packaging) %></td>
+      <td><%= link_to t(:destroy), packaging, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+</div>
+</div>
+</div>
