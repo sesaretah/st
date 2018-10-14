@@ -1,8 +1,10 @@
 <ul class="progressbar">
-    <li <% if active.include?('new_product')%> class="active" <%end%>><%=t :new_product %></li>
-    <li <% if active.include?('product_pictures')%> class="active" <%end%>><%=t :product_pictures%></li>
-    <li <% if active.include?('product_documents')%> class="active" <%end%>><%=t :product_documents%></li>
-    <li <% if active.include?('packaging_and_shipppment')%> class="active" <%end%>><%=t :packaging_and_shipppment%></li>
-    <li <% if active.include?('product_customers')%> class="active" <%end%>><%=t :product_customers%></li>
-    <li <% if active.include?('product_faq')%> class="active" <%end%>><%=t :product_faq%></li>
+    <li <% if active.include?('new_product')%> class="active" <%end%>><%= link_to t(:new_product), '/products/'+product.id.to_s+'/edit'  %></li>
+    <% if product.id != nil%>
+    <li <% if active.include?('product_pictures')%> class="active" <%end%>><%= link_to t(:product_pictures), '/products/product_pictures/'+product.id.to_s%></li>
+    <li <% if active.include?('product_documents')%> class="active" <%end%>><%= link_to t(:product_documents), '/products/product_documents/'+product.id.to_s%></li>
+    <li <% if active.include?('packaging_and_shipppment')%> class="active" <%end%>><%= link_to t(:packaging_and_shipppment), '/products/product_packaging/'+product.id.to_s%></li>
+    <li <% if active.include?('product_customers')%> class="active" <%end%>><%= link_to t(:product_customers), '/products/product_customers/'+product.id.to_s %></li>
+    <li <% if active.include?('product_faq')%> class="active" <%end%>><%= link_to t(:product_faq), '/products/product_faq/'+product.id.to_s%></li>
+    <%end%>
 </ul>

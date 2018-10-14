@@ -2,45 +2,30 @@
 
   <div class="col-lg-3  mb-4">
     <div class="card card-profile">
-      <div class="card-header" style="background-image: url(demo/photos/eberhard-grossgasteiger-311213-500.jpg);"></div>
+      <div class="card-header" style="background-color: #3e668a;"></div>
       <div class="card-body text-center">
-        <img class="card-profile-img" src="demo/faces/male/16.jpg">
+        <%= image_tag @company.logo(:medium), class: "card-profile-img"%>
         <h3 class="mb-3"><%= @company.name%></h3>
         <ul class="social-links list-inline mb-0 mt-2">
           <li class="list-inline-item mb-0">
-            <a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="Facebook" aria-describedby="tooltip244372"><i class="fa fa-facebook"></i></a>
+            <a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="Facebook" aria-describedby="tooltip244372"><i class="fe fe-at-sign"></i></a>
           </li>
           <li class="list-inline-item">
-            <a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-twitter"></i></a>
+            <a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-instagram"></i></a>
           </li>
           <li class="list-inline-item">
-            <a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="1234567890"><i class="fa fa-phone"></i></a>
+            <a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="1234567890"><i class="fa fa-telegram"></i></a>
           </li>
-          <li class="list-inline-item">
-            <a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="@skypename"><i class="fa fa-skype"></i></a>
-          </li>
+
         </ul>
       </div>
     </div>
     <!-- Getting started -->
+    <% if current_user.id == @company.user_id%>
     <div class="list-group list-group-transparent mb-0">
-      <a href="../docs/index.html" class="list-group-item list-group-item-action active"><span class="icon mr-3"><i class="fe fe-flag"></i></span>Introduction</a>
+        <%= link_to t(:edit), '/companies/'+@company.id.to_s+'/edit', class: "list-group-item list-group-item-action active" %>
     </div>
-    <!-- Components -->
-    <div class="list-group list-group-transparent mb-0">
-      <a href="../docs/alerts.html" class="list-group-item list-group-item-action">Alerts <span class="icon mr-3"><i class="fe fe-alert-triangle"></i></span></a>
-      <a href="../docs/avatars.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-user"></i></span>Avatars</a>
-      <a href="../docs/buttons.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-plus-square"></i></span>Buttons</a>
-      <a href="../docs/colors.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-feather"></i></span>Colors</a>
-      <a href="../docs/cards.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-image"></i></span>Cards</a>
-      <a href="../docs/charts.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-pie-chart"></i></span>Charts</a>
-      <a href="../docs/form-components.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-check-square"></i></span>Form components</a>
-      <a href="../docs/tags.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-tag"></i></span>Tags</a>
-      <a href="../docs/typography.html" class="list-group-item list-group-item-action"><span class="icon mr-3"><i class="fe fe-type"></i></span>Typography</a>
-    </div>
-    <div class="d-none d-lg-block mt-6">
-      <a href="https://github.com/tabler/tabler/edit/dev/src/_docs/index.md" class="text-muted">Edit this page</a>
-    </div>
+    <%end%>
   </div>
 
   <div class="col-lg-9 order-lg-1">
@@ -121,10 +106,145 @@
           <div class="avatar avatar-md mr-3" style="background-image: url(./demo/faces/female/18.jpg)"></div>
           <div>
             <a href="./profile.html" class="text-default"><%= profile.fullname%></a>
-            <small class="d-block text-muted">3 days ago</small>
+            <% @membership = Membership.where(profile_id: profile.id, company_id: @company.id).first%>
+            <small class="d-block text-muted"><%= @membership.role.title%></small>
           </div>
         </div>
         <%end%>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :company_exhibitions%></h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table card-table table-striped table-vcenter">
+            <thead>
+              <tr>
+                <th><%=t :title%></th>
+                <th><%=t :year%></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for participation in @company.participations%>
+              <% @exhibition = Exhibition.find(participation.exhibition_id)%>
+              <tr>
+                <td><small><%= truncate(@exhibition.title, length: 70) %></small></td>
+                <td><%= participation.year%></td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+        <hr class='mb-2'/>
+        <h5><%=t :exhibitions_pictures%></h5>
+        <div class='mb-2'>
+          <% for upload in Upload.where(uploadable_type: 'Company', uploadable_id: @company.id, attachment_type: 'exhibitions_pictures')%>
+          <a href="#" data-featherlight="<%= upload.attachment(:large)%>" data-featherlight-type="image">
+          <%= image_tag upload.attachment(:thumb)%>
+          </a>
+          <%end%>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :company_certificates%></h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table card-table table-striped table-vcenter">
+            <thead>
+              <tr>
+                <th><%=t :title%></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for earning in @company.earnings%>
+              <% @certification = Certification.find(earning.certification_id)%>
+              <tr>
+                <td><small><%= truncate(@certification.title, length: 50) %></small></td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+        <hr class='mb-2'/>
+        <h5><%=t :certifications_pictures%></h5>
+        <div class='mb-2'>
+          <% for upload in Upload.where(uploadable_type: 'Company', uploadable_id: @company.id, attachment_type: 'certifications_pictures')%>
+          <a href="#" data-featherlight="<%= upload.attachment(:large)%>" data-featherlight-type="image">
+          <%= image_tag upload.attachment(:thumb)%>
+          </a>
+          <%end%>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :company_honors%></h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table card-table table-striped table-vcenter">
+            <thead>
+              <tr>
+                <th><%=t :title%></th>
+                <th><%=t :year%></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for participation in @company.participations%>
+              <% @exhibition = Exhibition.find(participation.exhibition_id)%>
+              <tr>
+                <td><small><%= truncate(@exhibition.title, length: 50) %></small></td>
+                <td><%= participation.year%></td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+        <hr class='mb-2'/>
+        <h5><%=t :honors_pictures%></h5>
+        <div class='mb-2'>
+          <% for upload in Upload.where(uploadable_type: 'Company', uploadable_id: @company.id, attachment_type: 'honors_pictures')%>
+          <a href="#" data-featherlight="<%= upload.attachment(:large)%>" data-featherlight-type="image">
+          <%= image_tag upload.attachment(:thumb)%>
+          </a>
+          <%end%>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :company_album%></h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class='mb-2'>
+          <% for upload in Upload.where(uploadable_type: 'Company', uploadable_id: @company.id, attachment_type: 'honors_pictures')%>
+          <a href="#" data-featherlight="<%= upload.attachment(:large)%>" data-featherlight-type="image">
+          <%= image_tag upload.attachment(:thumb)%>
+          </a>
+          <%end%>
+        </div>
       </div>
     </div>
 

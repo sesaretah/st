@@ -1,0 +1,27 @@
+<div id='product_faqs_list'>
+  <div class="table-responsive">
+    <table class="table card-table table-striped table-vcenter">
+      <thead>
+        <tr>
+          <th><%=t :question%></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for faq in product.faqs%>
+        <tr>
+          <td><small><%= truncate(faq.question, length: 50) %></small></td>
+          <td class="">
+            <%= link_to faq, method: :delete, remote: true, data: { confirm: "#{t(:are_you_sure_?)}" } do%>
+              <i class="fe fe-trash"></i>
+            <%end%>
+            <%= link_to edit_faq_path(faq), remote: true do%>
+              <i class="fe fe-edit"></i>
+            <%end%>
+          </td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>

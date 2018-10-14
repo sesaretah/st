@@ -31,6 +31,7 @@ class ProfilesController < ApplicationController
   def create
     @profile = Profile.new(profile_params)
     @company = current_user.company
+    @profile.creator_id = current_user.id
     @role = Role.find(params[:role_id])
     respond_to do |format|
       if @profile.save
@@ -48,6 +49,7 @@ class ProfilesController < ApplicationController
   # PATCH/PUT /profiles/1
   # PATCH/PUT /profiles/1.json
   def update
+    @role = Role.find(params[:role_id])
     @company = current_user.company
     if params[:phonenumber_status].blank?
       @profile.phonenumber_status = false
@@ -55,15 +57,16 @@ class ProfilesController < ApplicationController
     if params[:email_status].blank?
       @profile.email_status = false
     end
+    if @profile.creator_id == current_user.id
+      @profile.update(profile_params)
+    end
+    @memberships = Membership.where(profile_id: @profile.id, company_id: @company.id)
+    for membership in @memberships
+      membership.destroy
+    end
+    Membership.create(profile_id: @profile.id, company_id: @company.id, adder_id: current_user.id, role_id: @role.id)
     respond_to do |format|
-      if @profile.update(profile_params)
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
-        format.json { render :show, status: :ok, location: @profile }
         format.js
-      else
-        format.html { render :edit }
-        format.json { render json: @profile.errors, status: :unprocessable_entity }
-      end
     end
   end
 

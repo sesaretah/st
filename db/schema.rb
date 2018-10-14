@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20181013110134) do
+ActiveRecord::Schema.define(version: 20181014132559) do
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -40,6 +40,24 @@ ActiveRecord::Schema.define(version: 20181013110134) do
     t.datetime "created_at",                        null: false
     t.datetime "updated_at",                        null: false
     t.string   "name",                limit: 255
+    t.string   "logo_file_name",      limit: 255
+    t.string   "logo_content_type",   limit: 255
+    t.integer  "logo_file_size",      limit: 8
+    t.datetime "logo_updated_at"
+    t.text     "about_us",            limit: 65535
+  end
+
+  create_table "customers", force: :cascade do |t|
+    t.string   "name",              limit: 255
+    t.integer  "company_id",        limit: 4
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.string   "logo_file_name",    limit: 255
+    t.string   "logo_content_type", limit: 255
+    t.integer  "logo_file_size",    limit: 8
+    t.datetime "logo_updated_at"
+    t.integer  "product_id",        limit: 4
+    t.string   "phone_number",      limit: 255
   end
 
   create_table "earnings", force: :cascade do |t|
@@ -55,6 +73,14 @@ ActiveRecord::Schema.define(version: 20181013110134) do
     t.string   "title",      limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "faqs", force: :cascade do |t|
+    t.string   "question",   limit: 255
+    t.text     "answer",     limit: 65535
+    t.integer  "product_id", limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "honors", force: :cascade do |t|
@@ -111,6 +137,8 @@ ActiveRecord::Schema.define(version: 20181013110134) do
     t.datetime "avatar_updated_at"
     t.boolean  "phonenumber_status"
     t.boolean  "email_status"
+    t.integer  "user_id",             limit: 4
+    t.integer  "creator_id",          limit: 4
   end
 
   create_table "roles", force: :cascade do |t|

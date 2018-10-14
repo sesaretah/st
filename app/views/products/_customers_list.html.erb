@@ -1,0 +1,29 @@
+<div id='product_customers_list'>
+  <div class="table-responsive">
+    <table class="table card-table table-striped table-vcenter">
+      <thead>
+        <tr>
+          <th><%=t :customer_name%></th>
+          <th><%=t :telphone%></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for customer in product.customers%>
+        <tr>
+          <td><small><%= truncate(customer.name, length: 50) %></small></td>
+          <td><%= customer.phone_number%></td>
+          <td class="">
+            <%= link_to customer, method: :delete, remote: true, data: { confirm: "#{t(:are_you_sure_?)}" } do%>
+              <i class="fe fe-trash"></i>
+            <%end%>
+            <%= link_to edit_customer_path(customer), remote: true do%>
+              <i class="fe fe-edit"></i>
+            <%end%>
+          </td>
+        </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </div>
+</div>

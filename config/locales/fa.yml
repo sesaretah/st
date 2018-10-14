@@ -228,6 +228,7 @@ fa:
           headquarter_address: 'آدرس دفتر مرکزی'
           shop_address: 'آدرس فروشگاه مرکزی'
           factory_address: 'آدرس کارخانه/کارگاه'
+          about_us: 'معرفی شرکت'
         category:
           name: 'عنوان'
         role:
@@ -247,6 +248,12 @@ fa:
           certification_id: 'عنوان گواهینامه یا جواز'
           start_year: 'سال شروع'
           end_year: 'سال پایان'
+        faq:
+          question: 'پرسش'
+          answer: 'پاسخ'
+        customer:
+          name: 'نام مشتری (حقیقی/حقوقی)'
+          phone_number: 'شماره تلفن'
         user:
             email: 'ایمیل'
             login: 'نام کاربر'
@@ -257,7 +264,7 @@ fa:
     page_gap: "&hellip;"
     previous_label: "قبلی"
     next_label: "بعدی"
-  new_product: 'مشخصات کالا'
+  new_product: 'مشخصات کالا/محصول'
   submit: 'ثبت'
   download: 'دانلود'
   settings: 'تنظیمات'
@@ -269,7 +276,7 @@ fa:
   headquarter_address: 'آدرس دفتر مرکزی'
   shop_address: 'آدرس فروشگاه مرکزی'
   factory_address: 'آدرس کارخانه/کارگاه'
-  product_pictures: 'عکس‌های کالا'
+  product_pictures: 'عکس های مرتبط با کالا/محصول'
   product_documents: 'گواهی‌ها و اسناد مرتبط'
   packaging_and_shipppment: 'اطلاعات بسته بندی و تحویل'
   drop_files_here_to_upload: 'برای بارگذاری فایل را اینجا بیاندازید'
@@ -322,6 +329,23 @@ fa:
   new_role: 'نقش جدید'
   role_id: 'نقش'
   profile_already_exists: 'کاربری با این شماره وجود دارد'
+  edit: 'ویرایش'
+  add_product_faq: 'افزودن سوال متداول'
+  faqs_list: 'لیست سوالات متداول این محصول'
+  question: 'پرسش'
+  you_can_now_edit_faq:  'اکنون می توانید ویرایش کنید'
+  faq_added_successfully: 'سوال متداول با موفقیت اضافه شد'
+  faq_updated_successfully: 'اطلاعات با موفقیت بروزرسانی شد.'
+  faq_destroyed_successfully:  'عملیات حذف با موفقیت انجام شد.'
+  add_product_customer: 'ثبت مشتریان این محصول'
+  customers_list: 'لیست مشتریان این محصول'
+  choose_a_file_for_logo: 'انتخاب فایل آرم مشتری'
+  customer_added_successfully: 'مشتری با موفقیت ثبت شد. '
+  customer_name: 'نام مشتری'
+  telphone: 'تلفن'
+  you_can_now_edit_customer: 'اکنون می توانید ویرایش کنید'
+  customer_updated_successfully: 'اطلاعات با موفقیت بروزرسانی شد.'
+  customer_destroyed_successfully: 'عملیات حذف با موفقیت انجام شد.'
   devise:
     confirmations:
       confirmed: حسابتان با موفقیت تایید شد. هم اکنون وارد شدید.
