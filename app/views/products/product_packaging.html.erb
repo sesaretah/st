@@ -1,4 +1,79 @@
 <%= render partial: 'products/progress_bar', locals: {product: @product, active: ['new_product', 'product_pictures', 'product_documents', 'packaging_and_shipppment']}%>
+
+
+<div class='row row-cards row-deck'>
+  <div  class='col-sm-6 col-lg-6'>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :add_packaging_and_shipppment%></h3>
+      </div>
+      <div class="card-status card-status-left bg-blue"></div>
+      <div class="card-body">
+        <% if @product.packaging.blank?%>
+          <%= render partial: 'packagings/remote_form', locals: {product: @product, packaging: Packaging.new}%>
+        <% else%>
+          <%= render partial: 'products/packaging_list', locals: {product: @product, packaging: @product.packaging}%>
+        <% end%>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-sm-6 col-lg-6'>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :packaging_and_shipppment_pictures%></h3>
+      </div>
+      <div class="card-body">
+        <%= form_for(Upload.new, html: {class: 'dropzone', style: 'margin: 0px;'}) do |f| %>
+        <%= f.hidden_field :uploadable_type, value: 'Product'%>
+        <%= f.hidden_field :uploadable_id, value: @product.id%>
+        <%= f.hidden_field :attachment_type, value: 'packaging_and_shipppment_pictures'%>
+        <%= hidden_field_tag :file_type, 'picture'%>
+        <div class="fallback">
+          <%= f.file_field :picture %><br>
+          <%= f.hidden_field :uploadable_type, value: 'Product'%>
+          <%= f.hidden_field :uploadable_id, value: @product.id%>
+          <%= f.hidden_field :attachment_type, value: 'packaging_and_shipppment_pictures'%>
+          <%= f.submit "Upload" %>
+        </div>
+        <% end %>
+        <script>
+        Dropzone.autoDiscover = false;
+        $("#new_upload").dropzone({
+          dictDefaultMessage : "<%=t :drop_files_here_to_upload%>",
+          dictRemoveFile : "<%=t :remove_file %>",
+          acceptedFiles : '.png,.jpg,.jpeg',
+          addRemoveLinks: true,
+          removedfile: function(file) {
+            $.get( "/uploads/remoted/" + file.id, function( data ) {
+              console.log(data);
+            });
+            var _ref;
+            return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;
+          },
+          init: function () {
+            this.on("success", function(file, responseText) {
+              file.id = responseText.id;
+            });
+
+            <% for upload in Upload.where(uploadable_type: 'Product', uploadable_id: @product.id, attachment_type: 'packaging_and_shipppment_pictures')%>
+            var mockFile = { name: "<%= upload.attachment_file_name%>", size: <%= upload.attachment_file_size%>, url: "<%= upload.attachment.url%>", id: <%= upload.id%> };
+            this.options.addedfile.call(this, mockFile);
+            this.options.thumbnail.call(this, mockFile, "<%= upload.attachment(:large)%>");
+            mockFile.previewElement.classList.add('dz-success');
+            mockFile.previewElement.classList.add('dz-complete');
+            <%end%>
+          }
+        });
+        </script>
+      </div>
+      <div class="card-footer text-right">
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <div class="card">
   <div class="card-header">
     <h3 class="card-title"><%=t :packaging_and_shipppment%></h3>
@@ -16,28 +91,5 @@
   <div class="card-footer text-right">
     <a href='/products/product_documents/<%= @product.id%>' class="btn btn-lime"><%=t :back%></a>
     <a href='/products/product_customers/<%= @product.id%>' class="btn btn-primary"><%=t :submit_and_go%></a>
-  </div>
-</div>
-
-<div class='row row-cards row-deck'>
-  <div  class='col-sm-6 col-lg-6'>
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title"><%=t :add_product_customer%></h3>
-      </div>
-      <div class="card-status card-status-left bg-blue"></div>
-      <div class="card-body">
-        <%= render partial: 'packagings/remote_form', locals: {product: @product, packaging: Packaging.new}%>
-      </div>
-    </div>
-  </div>
-
-  <div class='col-sm-6 col-lg-6'>
-    <div class="card">
-      <div class="card-header">
-        <h3 class="card-title"><%=t :customers_list%></h3>
-      </div>
-      <%= render partial: 'products/packaging_list', locals: {product: @product}%>
-    </div>
   </div>
 </div>

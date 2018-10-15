@@ -1,0 +1,29 @@
+<%= form_for(@packaging_type, html: {class: 'card'}) do |f| %>
+<div class="card-header">
+  <h3 class="card-title"><%=t :new_packaging_type %></h3>
+</div>
+<% if @packaging_type.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@packaging_type.errors.count, "error") %> prohibited this packaging_type from being saved:</h2>
+
+  <ul>
+    <% @packaging_type.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
+
+<div class="card-body">
+<div class="row">
+  <div class="col-md-5">
+    <div class="form-group">
+          <%= f.label :title, class: "form-label" %>
+      <%= f.text_field :title , class: "form-control" %>
+          </div>
+  </div>
+</div>
+<div class="card-footer text-right">
+  <button type="submit" class="btn btn-primary"><%=t :submit%></button>
+</div>
+<% end %>

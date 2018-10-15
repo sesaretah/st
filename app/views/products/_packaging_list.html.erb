@@ -1,3 +1,44 @@
 <div id='product_packaging_list'>
-
+  <div class ='row'>
+    <div class='col-md-11 col-lg-11'>
+      <div class='row'>
+        <div class='col-md-6 col-lg-6'>
+          <div class="form-group">
+            <%= label_tag t('activerecord.attributes.packaging.dimensions'), nil , class: "form-label", style: 'color: #7795c1;'%>
+            <div class="form-control-plaintext"><%= packaging.dimensions %></div>
+          </div>
+          <div class="form-group">
+            <%= label_tag t('activerecord.attributes.packaging.weight'), nil , class: "form-label", style: 'color: #7795c1;'%>
+            <div class="form-control-plaintext"><%= packaging.weight %> <%= rweight_scales(packaging.weight_scale)%></div>
+          </div>
+        </div>
+        <div class='col-md-6 col-lg-6'>
+          <div class="form-group">
+            <%= label_tag t('activerecord.attributes.packaging.packaging_type'), nil , class: "form-label", style: 'color: #7795c1;'%>
+            <div class="form-control-plaintext"><%= PackagingType.find(packaging.packaging_type_id).title%></div>
+          </div>
+          <div class="form-group">
+            <%= label_tag t('activerecord.attributes.packaging.color'), nil , class: "form-label", style: 'color: #7795c1;'%>
+            <div class="form-control-plaintext"><%= packaging.color %></div>
+          </div>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-12 col-lg-12'>
+          <div class="form-group">
+            <%= label_tag t('activerecord.attributes.packaging.delivery_detail'), nil , class: "form-label", style: 'color: #7795c1;'%>
+            <div class="form-control-plaintext"><%= packaging.delivery_detail%></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='col-md-1 col-lg-1'>
+      <%= link_to edit_packaging_path(packaging), remote: true do%>
+      <i class="fe fe-edit"></i>
+      <%end%>
+      <%= link_to packaging, method: :delete, remote: true, data: { confirm: "#{t(:are_you_sure_?)}" } do%>
+        <i class="fe fe-trash"></i>
+      <%end%>
+    </div>
+  </div>
 </div>

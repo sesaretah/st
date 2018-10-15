@@ -1,4 +1,4 @@
-<%= form_for(packaging, remote: true,  html:{id: 'product_packagings_form'}) do |f| %>
+<%= form_for(packaging, remote: true,  html:{id: 'product_packaging_form'}) do |f| %>
 <% if packaging.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(packaging.errors.count, "error") %> prohibited this packaging from being saved:</h2>
@@ -27,7 +27,7 @@
   <div class="col-md-3">
     <div class="form-group">
       <%= f.label :weight_scale, class: "form-label" %>
-      <%= f.text_field :weight_scale , class: "form-control" %>
+      <%= f.select( :weight_scale, weight_scales, {}, {:class => "form-control"})  %>
     </div>
   </div>
 </div>
@@ -36,7 +36,7 @@
   <div class="col-md-6">
     <div class="form-group">
       <%= f.label :packaging_type, class: "form-label" %>
-      <%= f.number_field :packaging_type , class: "form-control" %>
+      <%= f.select :packaging_type_id, PackagingType.all.collect { |p| [ p.title, p.id ] } , {} ,{ :class => "form-control"}%>
     </div>
   </div>
   <div class="col-md-6">

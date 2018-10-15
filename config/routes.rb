@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :packaging_types
   resources :packagings
   resources :customers
   resources :faqs

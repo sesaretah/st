@@ -8,3 +8,10 @@
     <li <% if active.include?('product_faq')%> class="active" <%end%>><%= link_to t(:product_faq), '/products/product_faq/'+product.id.to_s%></li>
     <%end%>
 </ul>
+<div class="alert alert-primary mt-5 ">
+    <div><%=t :in_this_section%><strong> <%=t active.last%> </strong><%=t :is_filled%>. </div>
+</div>
+<div class="alert alert-warning alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert"></button>
+  <i class="fe fe-info" style="vertical-align: middle;"></i> <%=t :for_detailed_help_see_bellow%>.
+</div>
