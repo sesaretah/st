@@ -1,34 +1,18 @@
 <div class="row">
-
-  <div class="col-lg-3  mb-4">
-    <div class="card card-profile">
-      <div class="card-header" style="background-color: #3e668a;"></div>
-      <div class="card-body text-center">
-        <%= image_tag @company.logo(:medium), class: "card-profile-img"%>
-        <h3 class="mb-3"><%= @company.name%></h3>
-        <ul class="social-links list-inline mb-0 mt-2">
-          <li class="list-inline-item mb-0">
-            <a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="Facebook" aria-describedby="tooltip244372"><i class="fe fe-at-sign"></i></a>
-          </li>
-          <li class="list-inline-item">
-            <a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="Twitter"><i class="fa fa-instagram"></i></a>
-          </li>
-          <li class="list-inline-item">
-            <a href="javascript:void(0)" title="" data-toggle="tooltip" data-original-title="1234567890"><i class="fa fa-telegram"></i></a>
-          </li>
-
-        </ul>
-      </div>
-    </div>
+  <div class="col-lg-4  mb-4">
+    <%= render partial: 'companies/company_sidebar', locals: {company: @company}%>
     <!-- Getting started -->
     <% if current_user.id == @company.user_id%>
-    <div class="list-group list-group-transparent mb-0">
-        <%= link_to t(:edit), '/companies/'+@company.id.to_s+'/edit', class: "list-group-item list-group-item-action active" %>
+    <div class="list-group list-group-transparent mb-4 text-center">
+      <%= link_to '/companies/'+@company.id.to_s+'/edit', class: "list-group-item list-group-item-action active", style:'font-weight:normal;' do%>
+      <i class="fe fe-edit" style="vertical-align:middle;"></i> <%=t :edit_company%>
+      <%end%>
     </div>
     <%end%>
+    <%= render partial: 'products/product_sidebar', locals: {company: @company, header_text: 'company_products'}%>
   </div>
 
-  <div class="col-lg-9 order-lg-1">
+  <div class="col-lg-8 order-lg-1">
     <div class="card">
       <div class="card-header">
         <h3 class="card-title"><%=t :company_info%></h3>

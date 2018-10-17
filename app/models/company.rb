@@ -11,6 +11,7 @@ class Company < ActiveRecord::Base
   has_many :certifications, :through => :earnings
 
   has_many :honors
+  has_many :products
 
   belongs_to :user
 end

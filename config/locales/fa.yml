@@ -364,10 +364,16 @@ fa:
   kilogram: 'کیلوگرم'
   tonn: 'تن'
   pond: 'پوند'
+  product_info: 'اطلاعات کالا/محصول'
   in_this_section: 'در این قسمت شما می توانید اطلاعات مربوط به'
   is_filled: 'را تکمیل نمایید'
   for_detailed_help_see_bellow: 'برای راهنمایی بیشتر به پایین صفحه مراجعه کنید'
   packaging_added_successfully: 'اطلاعات بسته بندی با موقیت ثبت شد'
+  download_file: 'دریافت فایل'
+  edit_product: 'ویرایش کالا/محصول'
+  edit_company: 'ویرایش اطلاعات شرکت/بنگاه اقتصادی'
+  company_products: 'محصولات شرکت'
+  company_other_products: 'سایر محصولات شرکت'
   devise:
     confirmations:
       confirmed: حسابتان با موفقیت تایید شد. هم اکنون وارد شدید.

@@ -1,19 +1,189 @@
-<p id="notice"><%= notice %></p>
+<div class='row'>
+  <div class="col-lg-4 order-lg-1">
+    <%= render partial: 'companies/company_sidebar', locals: {company: @product.company}%>
+    <% if current_user.id == @product.company.user_id%>
+    <div class="list-group list-group-transparent mb-4 text-center" >
+      <%= link_to '/products/'+@product.id.to_s+'/edit', class: "list-group-item list-group-item-action active", style:'font-weight:normal;' do%>
+      <i class="fe fe-edit" style="vertical-align:middle;"></i> <%=t :edit_product%>
+      <%end%>
+    </div>
+    <%end%>
+        <%= render partial: 'products/product_sidebar', locals: {company: @product.company, header_text: 'company_other_products'}%>
+  </div>
+  <div class="col-lg-8 order-lg-1">
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :product_info%></h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class='row'>
+          <div class='col-md-12 col-lg-12'>
+            <div class="form-group">
+              <%= label :product, :name , class: "form-label", style: 'color: #7795c1;'%>
+              <div class="form-control-plaintext"><%= @product.name%></div>
+            </div>
+            <div class="form-group">
+              <%= label :product, :description , class: "form-label", style: 'color: #7795c1;'%>
+              <div class="form-control-plaintext" style="text-align: justify;"><%= @product.description%></div>
+            </div>
+            <div class="form-group">
+              <%= label :product, :category_id , class: "form-label", style: 'color: #7795c1;'%>
+              <div class="form-control-plaintext"><%= Category.find(@product.category_id).name%></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :product_pictures%></h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class='row'>
+          <div class='col-md-12 col-lg-12'>
+            <div class='mb-2'>
+              <% for upload in Upload.where(uploadable_type: 'Product', uploadable_id: @product.id, attachment_type: 'product_pictures')%>
+              <a href="#" data-featherlight="<%= upload.attachment(:large)%>" data-featherlight-type="image">
+                <%= image_tag upload.attachment(:medium)%>
+              </a>
+              <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description %>
-</p>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :product_documents%></h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class='row'>
+          <div class='col-md-12 col-lg-12'>
+            <div class='mb-2'>
+              <% for upload in Upload.where(uploadable_type: 'Product', uploadable_id: @product.id, attachment_type: 'product_documents')%>
+              <% if upload.attachment_content_type.include?("application") || upload.attachment_content_type.include?("text")%>
+              <p>
+                <%= link_to upload.attachment.url do%>
+                <i class="fe fe-download" style="vertical-align:middle;"></i> <%=t :download_file%>
+                <%end%>
+              </p>
+              <%else%>
+              <a href="#" data-featherlight="<%= upload.attachment(:large)%>" data-featherlight-type="image">
+                <%= image_tag upload.attachment(:medium)%>
+              </a>
+              <%end%>
+              <%end%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-<p>
-  <strong>Category:</strong>
-  <%= @product.category_id %>
-</p>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :packaging_and_shipppment%></h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <% @packaging = Packaging.where(product_id: @product.id).last%>
+      <% if !@packaging.blank?%>
+      <div class="card-body">
+        <div class='row'>
+          <div class='col-md-12 col-lg-12'>
+            <div class='row'>
+              <div class='col-md-6 col-lg-6'>
+                <div class="form-group">
+                  <%= label_tag t('activerecord.attributes.packaging.dimensions'), nil , class: "form-label", style: 'color: #7795c1;'%>
+                  <div class="form-control-plaintext"><%= @packaging.dimensions %></div>
+                </div>
+                <div class="form-group">
+                  <%= label_tag t('activerecord.attributes.packaging.weight'), nil , class: "form-label", style: 'color: #7795c1;'%>
+                  <div class="form-control-plaintext"><%= @packaging.weight %> <%= rweight_scales(@packaging.weight_scale)%></div>
+                </div>
+              </div>
+              <div class='col-md-6 col-lg-6'>
+                <div class="form-group">
+                  <%= label_tag t('activerecord.attributes.packaging.packaging_type'), nil , class: "form-label", style: 'color: #7795c1;'%>
+                  <div class="form-control-plaintext"><%= PackagingType.find(@packaging.packaging_type_id).title%></div>
+                </div>
+                <div class="form-group">
+                  <%= label_tag t('activerecord.attributes.packaging.color'), nil , class: "form-label", style: 'color: #7795c1;'%>
+                  <div class="form-control-plaintext"><%= @packaging.color %></div>
+                </div>
+              </div>
+            </div>
+            <div class='row'>
+              <div class='col-md-12 col-lg-12'>
+                <div class="form-group">
+                  <%= label_tag t('activerecord.attributes.packaging.delivery_detail'), nil , class: "form-label", style: 'color: #7795c1;'%>
+                  <div class="form-control-plaintext"><%= @packaging.delivery_detail%></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <%end%>
+    </div>
 
-<%= link_to 'Edit', edit_product_path(@product) %> |
-<%= link_to 'Back', products_path %>
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :product_customers%></h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table card-table table-striped table-vcenter">
+            <thead>
+              <tr>
+                <th><%=t :customer_name%></th>
+                <th><%=t :telphone%></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% for customer in @product.customers%>
+              <tr>
+                <td><small><%= truncate(customer.name, length: 50) %></small></td>
+                <td><%= customer.phone_number%></td>
+              </tr>
+              <%end%>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title"><%=t :product_faq%></h3>
+        <div class="card-options">
+          <a href="#" class="card-options-collapse" data-toggle="card-collapse"><i class="fe fe-chevron-up"></i></a>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <% for faq in @product.faqs%>
+          <p>
+            <strong><%= faq.question%></strong><br />
+            <%= faq.answer%>
+          </p>
+          <%end%>
+        </div>
+      </div>
+
+    </div>
+  </div>

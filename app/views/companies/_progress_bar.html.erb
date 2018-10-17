@@ -8,3 +8,11 @@
       <li <% if active.include?('company_album')%> class="active" <%end%>><%= link_to t(:company_album), '/companies/company_album/'+ company.id.to_s %></li>
   </ul>
 </div>
+
+<div class="alert alert-primary mt-5 ">
+    <div><%=t :in_this_section%><strong> <%=t active.last%> </strong><%=t :is_filled%>. </div>
+</div>
+<div class="alert alert-warning alert-dismissible">
+  <button type="button" class="close" data-dismiss="alert"></button>
+  <i class="fe fe-info" style="vertical-align: middle;"></i> <%=t :for_detailed_help_see_bellow%>.
+</div>

@@ -1,0 +1,15 @@
+<div class="card">
+  <div class="card-status bg-teal"></div>
+  <div class="card-header">
+    <h3 class="card-title"><%=t header_text%></h3>
+  </div>
+  <div class="card-body">
+    <% for product in company.products%>
+    <p class="mb-2">
+      <%= link_to product do %>
+        <i class="fe fe-box" style="vertical-align:middle;"></i> <%= truncate(product.name, length: 50)%>
+      <%end%>
+    </p>
+    <%end%>
+  </div>
+</div>
