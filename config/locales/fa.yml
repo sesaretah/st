@@ -374,6 +374,10 @@ fa:
   edit_company: 'ویرایش اطلاعات شرکت/بنگاه اقتصادی'
   company_products: 'محصولات شرکت'
   company_other_products: 'سایر محصولات شرکت'
+  show: 'نمایش'
+  destroy: 'حذف'
+  viewpoint_added_successfully: 'نقطه نظر شما با موفقیت ثبت شد.'
+  viewpoint_destroyed_successfully: 'نقطه نظر شما حذف شد'
   devise:
     confirmations:
       confirmed: حسابتان با موفقیت تایید شد. هم اکنون وارد شدید.

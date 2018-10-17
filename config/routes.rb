@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :viewpoints
   resources :packaging_types
   resources :packagings
   resources :customers

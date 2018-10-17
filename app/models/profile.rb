@@ -4,6 +4,7 @@ class Profile < ActiveRecord::Base
 
   has_many :memberships, dependent: :destroy
   has_many :companies, :through => :memberships
+  belongs_to :user
 
   def fullname
     "#{self.name} #{self.surename}"

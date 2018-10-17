@@ -1,24 +1,23 @@
-<p id="notice"><%= notice %></p>
+<div class="row">
+  <div class="col-lg-4  mb-4">
+    <%= render partial: 'profiles/profile_sidebar', locals: {profile: @profile}%>
+    <!-- Getting started -->
+    <% if current_user.id == @profile.user_id%>
+    <div class="list-group list-group-transparent mb-4 text-center">
+      <%= link_to '/profiles/'+@profile.id.to_s+'/edit', class: "list-group-item list-group-item-action active", style:'font-weight:normal;' do%>
+      <i class="fe fe-edit" style="vertical-align:middle;"></i> <%=t :edit_company%>
+      <%end%>
+    </div>
+    <%end%>
 
-<p>
-  <strong>Name:</strong>
-  <%= @profile.name %>
-</p>
+  </div>
 
-<p>
-  <strong>Surename:</strong>
-  <%= @profile.surename %>
-</p>
+  <div class="col-lg-8 order-lg-1">
+    <%= render partial: 'viewpoints/remote_form', locals: {viewpoint: Viewpoint.new}%>
 
-<p>
-  <strong>Phonenumber:</strong>
-  <%= @profile.phonenumber %>
-</p>
+    <div class="card">
+      <%= render partial: 'profiles/profile_viewpoints', locals: {user: current_user}%>
+    </div>
 
-<p>
-  <strong>Email:</strong>
-  <%= @profile.email %>
-</p>
-
-<%= link_to 'Edit', edit_profile_path(@profile) %> |
-<%= link_to 'Back', profiles_path %>
+  </div>
+</div>

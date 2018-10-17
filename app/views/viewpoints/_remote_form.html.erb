@@ -1,0 +1,26 @@
+<%= form_for(viewpoint, html: {class: 'card', remote: true, id: 'viewpoint-form'}) do |f| %>
+  <% if viewpoint.errors.any? %>
+  <div id="error_explanation">
+    <h2><%= pluralize(viewpoint.errors.count, "error") %> prohibited this viewpoint from being saved:</h2>
+
+    <ul>
+      <% viewpoint.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="form-group">
+          <%= f.text_area :content , class: "form-control" %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card-footer text-right">
+    <button type="submit" class="btn btn-primary btn-sm"> <i class="fe fe-corner-down-left" style="vertical-align: -3px;"></i> <%=t :submit%></button>
+  </div>
+<% end %>
