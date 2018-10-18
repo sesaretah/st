@@ -6,20 +6,25 @@
         <div class="media-object avatar avatar-md mr-4" style="background-image: url(<%= user.profile.avatar(:thumb)%>)"></div>
         <div class="media-body">
           <div class="media-heading">
-            <small class="float-right text-muted">
+            <div class='trash text-muted' style='display: inline-block;float: left;margin-top: 0px;'>
               <%= link_to viewpoint, method: :delete, remote: true, data: { confirm: "#{t(:are_you_sure_?)}" } do%>
-                <i class="fe fe-trash"></i>
+              <i class="fe fe-trash"></i>
               <%end%>
-            </small>
-            <small class="float-right text-muted"></small>
-            <h5><%= user.profile.fullname%></h5>
+              <%= render partial: 'likes/liike', locals: { item: viewpoint}%>
+            </div>
+                        <h5><%= user.profile.fullname%></h5>
           </div>
           <div class="text-justify">
             <%= viewpoint.content%>
           </div>
-          <div class='text-right' style="font-style:italic;color: #b5b5b5;font-size: 12px;">
-              <%= viewpoint.created_at%>
+          <div class='text-right' style="color: #b5b5b5;font-size: 12px;">
+            <span>
+              <% @jalali = JalaliDate.to_jalali(viewpoint.created_at)%>
+              <%= @jalali.year%>/<%= @jalali.month%>/<%= @jalali.day%>
+              (<i class="fe fe-clock" style="font-size: 10px;vertical-align:-2px;"></i> <%= viewpoint.created_at.localtime.strftime("%H:%M") %>)
+            </span>
           </div>
+            <%= render partial: 'viewpoints/viewpoint_comments', locals: {viewpoint: viewpoint}%>
         </div>
       </div>
     </li>

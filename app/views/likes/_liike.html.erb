@@ -1,0 +1,13 @@
+<div id='like-<%= item.id%>' style="display: inline;">
+  <% @like = Like.where(likeable_type: item.class.name, likeable_id: item.id, user_id: current_user.id ).first%>
+  <% if @like.blank?%>
+    <%= link_to "/likes/liike/1?likeable_type=#{item.class.name}&likeable_id="+ item.id.to_s, :method => :get, remote: true  do %>
+    <i class="fa fa-heart-o" style="color: grey !important;vertical-align: middle;"></i>
+    <%end%>
+    <%else%>
+    <%= link_to "/likes/disliike/1?likeable_type=#{item.class.name}&likeable_id="+ item.id.to_s, :method => :get, remote: true  do %>
+    <i class="fa fa-heart" style="color: #b31919 !important;vertical-align: middle;"></i>
+    <%end%>
+    <%end%>
+    <span style='font-size: 10px;'><%= Like.where(likeable_type: item.class.name, likeable_id: item.id).count%><span>
+</div>

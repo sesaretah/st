@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
   has_one :company
   has_one :profile
   has_many :viewpoints
+  has_many :comments
 end

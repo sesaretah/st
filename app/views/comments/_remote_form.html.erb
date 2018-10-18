@@ -1,0 +1,13 @@
+<hr class='mt-2 mb-2' style='margin-left: -15px;'/>
+<%= form_for(comment, remote: true,html: {id: "comment-form-#{viewpoint.id}"}) do |f| %>
+<div class="input-group" style="margin: 6px 7px -5px 5px;">
+  <%= f.text_field :content, class:"form-control", placeholder:"#{t(:leave_comment)}", autocomplete:"off"%>
+  <%= f.hidden_field :commentable_id, value: viewpoint.id%>
+  <%= f.hidden_field :commentable_type, value: 'Viewpoint'%>
+  <div class="input-group-append">
+    <button  type="submit" class="btn btn-secondary">
+      <i class="fe fe-corner-down-left" style="vertical-align: -3px;"></i>
+    </button>
+  </div>
+</div>
+<% end %>

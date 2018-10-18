@@ -378,6 +378,13 @@ fa:
   destroy: 'حذف'
   viewpoint_added_successfully: 'نقطه نظر شما با موفقیت ثبت شد.'
   viewpoint_destroyed_successfully: 'نقطه نظر شما حذف شد'
+  leave_comment: 'نظر بدهید...'
+  comment_added_successfully: 'نظر با موفقیت ثبت شد'
+  comment_destroyed_successfully: 'نظر حذف شد'
+  profiles: 'افراد'
+  companies: 'شرکت‌ها'
+  products: 'محصولات'
+  edit_profile: 'ویرایش پروفایل'
   devise:
     confirmations:
       confirmed: حسابتان با موفقیت تایید شد. هم اکنون وارد شدید.

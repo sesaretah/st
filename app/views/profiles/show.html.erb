@@ -5,7 +5,7 @@
     <% if current_user.id == @profile.user_id%>
     <div class="list-group list-group-transparent mb-4 text-center">
       <%= link_to '/profiles/'+@profile.id.to_s+'/edit', class: "list-group-item list-group-item-action active", style:'font-weight:normal;' do%>
-      <i class="fe fe-edit" style="vertical-align:middle;"></i> <%=t :edit_company%>
+      <i class="fe fe-edit" style="vertical-align:middle;"></i> <%=t :edit_profile%>
       <%end%>
     </div>
     <%end%>

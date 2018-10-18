@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :likes
+  resources :comments
   resources :viewpoints
   resources :packaging_types
   resources :packagings
@@ -37,6 +39,9 @@ Rails.application.routes.draw do
   match "/certifications/search/:id"  => "certifications#search", :via => :get
 
   match "/profiles/mobile_search/:id" => "profiles#mobile_search", :via => :get
+
+  match "/likes/liike/:id" => "likes#liike", :via => :get
+  match "/likes/disliike/:id" => "likes#disliike", :via => :get
 
   match "/uploads/remoted/:id" => "uploads#remoted", :via => :get
 end
